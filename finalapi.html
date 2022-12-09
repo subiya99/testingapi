@@ -1,0 +1,689 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning Vertos</title>
+  <!--bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+
+<body class="">
+    <section class="shadow-sm sticky-top bg-white">
+        <div id="top-header" class="d-flex align-items-center justify-content-center" style="height: 76px;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white flex-fill">
+          <div class="container-fluid">
+            <img src="images/logo_se_green_rgb_screen.png" id="logo" width="120px" height="50px">
+            <h4 class="ms-3 tog-1">DLMS Scheduler</h4>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-start bg-white" tabindex="-1" id="navbarSupportedContent">
+              <ul class="navbar-nav mb-2 mb-lg-0 ms-lg-auto">
+                <li class="nav-item">
+                  <button type="button" class="float-end tog m-2 btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </li>
+                
+                <div class="dropdown me-4">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle mx-2" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="hugenerd" width="50" height="50" class="rounded-circle">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                      </div>
+                </div>
+              </ul>     
+            </div>
+          </div>
+        </nav>
+      </div>
+      </section>
+    <section>
+        <div id="side-header">
+            <div class="sidenav ps-sm-2 ps-md-4 text-start">
+                <a href="index.html"><img src="images/layout.png" style="width: 20px; height: 20px;" class="me-2">Dashboard</a>
+                <a href="run.html"><img src="images/dashboard.png" style="width: 20px; height: 20px;" class="me-2">Running Schedule</a>
+                <a href="#clients"><img src="images/gear.png" style="width: 20px; height: 20px;" class="me-2">Schedule config</a>
+                  <a href=""><img src="images/new-tab.png" style="width: 20px; height: 20px;" class="me-2">Auto Schedule</a>
+                  <a class="btn btn-primary mx-2 ms-md-0 me-md-4 me-2" style="margin-top: 250px;">Get Support</a>
+              </div>
+              <div class="main-content my-4">
+                <div id="mySidebar" class="sidebar">
+                  <div><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
+                  <div class="ps-sm-2 ps-md-4 text-start">
+                    <a href="index.html"><img src="images/layout.png" style="width: 20px; height: 20px;" class="me-2">Dashboard</a>
+                    <a href="run.html"><img src="images/dashboard.png" style="width: 20px; height: 20px;" class="me-2">Running Schedule</a>
+                    <a href="#clients"><img src="images/gear.png" style="width: 20px; height: 20px;" class="me-2">Schedule config</a>
+                      <a href=""><img src="images/new-tab.png" style="width: 20px; height: 20px;" class="me-2">Auto Schedule</a>
+                      <a class="btn btn-primary mx-5 me-2" style="margin-top: 300px;">Get Support</a>
+                  </div>
+              </div>        
+              <button class="openbtn hidebtn" onclick="openNav()">&#9776; Table of content</button>
+                <section class="navbar-light bg-white">
+                    <div id="header">
+                      <nav id="navbar-example2" class="navbar px-3">
+                        <ul class="nav active-nav">
+                          <li class="nav-item active">
+                            <a class="nav-link" id="active" data-page="active" href="#active">Communication Settings</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" id="upcoming" data-page="upcoming" href="#upcoming">Schedule Settings</a>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
+                    </section>
+                <div id="pages">
+                <form id="contact-form">
+                    <div id="active" class="page" data-page="active" style="margin-top: 40px;">
+                      <div class="d-flex flex-row flex-wrap">
+                          <h6 class="pe-4 pt-2">Communication Type:</h6>
+                          <div style="width: 30%;">
+                            <select class="col form-select form-select-sm div-toggle" aria-label=".form-select-sm example" data-target="info" name="ModeOfCommunication">
+                              <option selected value="DIRECT">Direct</option>
+                              <option value="RS485">RS485</option>
+                              <option value="SERIAL">Serial Port</option>
+                              <option value="TCPIP">TCP IP</option>
+                            </select>
+                          </div>
+                      </div>
+                      <div class="container-fluid">
+                          <div class="row text-start mt-5">
+                              <div class="col-md-5 mb-3">
+                                  <h5>Port Details</h5>
+                                  <div class="card p-4">
+                                      <div class="row">
+                                          <h6 class="col-5">COM Port :</h6>
+                                          <select class="col form-select form-select-sm" aria-label=".form-select-sm example" name="COMPort">
+                                              <option selected value="COM1">COM1</option>
+                                              <option value="COM2">COM2</option>
+                                              <option value="COM3">COM3</option>
+                                              <option value="COM4">COM4</option>
+                                              <option value="COM5">COM5</option>
+                                              <option value="COM6">COM6</option>
+                                              <option value="COM7">COM7</option>
+                                          </select>
+                                      </div>
+                                      <div class="row pt-3">
+                                          <h6 class="col-5">Parity :</h6>
+                                          <select class="col form-select form-select-sm" aria-label=".form-select-sm example" name="Parity">
+                                              <option VALUE="300">300</option>
+                                              <option value="1200">1200</option>
+                                              <option value="2400">2400</option>
+                                              <option value="4800">4800</option>
+                                              <option selected value="9600">9600</option>
+                                              <option value="115200">115200</option>
+                                            </select>
+                                      </div>
+                                      <div class="row pt-3">
+                                          <h6 class="col-5">Baud Rate :</h6>
+                                          <select class="col form-select form-select-sm" aria-label=".form-select-sm example" name="Baudrate">
+                                              <option value="NO">NO</option>
+                                              <option value="EVEN">EVEN</option>
+                                              <option value="ODD">ODD</option>
+                                              <option value="MARK">MARK</option>
+                                              <option value="SPACE">SPACE</option>
+                                              <option value="0">0</option>
+                                              <option selected value="1">1</option>
+                                            </select>
+                                      </div>
+                                    </div>
+                              </div> 
+                              <div class="col-md-7">
+                                  <h5>Meter Details</h5>
+                                  <div class="card p-4 pt-2">
+                                      <div class="row">
+                                        <div class="col-md-5">
+                                          <div class="mb-2">
+                                            <a class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Selected parameters </a>
+                                          </div>
+                                          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                              <div class="modal-content" id="editor">
+                                                <div class="modal-header">
+                                                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Selection of parameters</h1>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body fs-6">
+                                                  <div class="form-check">
+                                                    <label><input class="form-check-input" type="checkbox" name="Profile" value="2" id="flexCheckDefault">
+                                                      Biling profile
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <label><input class="form-check-input" type="checkbox" name="Profile" value="4" id="flexCheckDefault">
+                                                      Daily load profile
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <label><input class="form-check-input" type="checkbox" name="Profile" value="1" id="flexCheckDefault">
+                                                      Instantaneous
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <label><input class="form-check-input" type="checkbox" name="check" value="Power fail related events" id="flexCheckDefault">
+                                                      Power fail related events
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <label><input class="form-check-input" type="checkbox" name="check" value="Voltage related events" id="flexCheckDefault">
+                                                      Voltage related events
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <label><input class="form-check-input" type="checkbox" name="check" value="Current related events" id="flexCheckDefault">
+                                                      Current related events
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <label><input class="form-check-input" type="checkbox" name="check" value=" Other events" id="flexCheckDefault">
+                                                      Other events
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <label><input class="form-check-input" type="checkbox" name="check" value="Non-rolled events" id="flexCheckDefault">
+                                                      Non-rolled events
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <label><input class="form-check-input" type="checkbox" name="Profile" value="3" id="flexCheckDefault">
+                                                      Load profile
+                                                    </label>
+                                                  </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" id="btnSave" >Update</button>
+                                                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col" >
+                                          <p id="demo" class="fs-6 pt-2 mb-2"></p>
+                                        </div>
+                                      </div>
+                                      <div class="row pt-1">
+                                        <h6 class="col-6 pt-1">Number of Parameter selected </h6>
+                                        <div class="col fs-6 pt-2" id="countno"></div>
+                                    </div>
+                                      <div class="row pt-1">
+                                          <h6 class="col-5 pt-1">Number of Meters: </h6>
+                                          <input type="tel" class="col form-control form-control-sm" id="exampleFormControlInput1" placeholder="Write numeric value" name="totalno" value="1">
+                                      </div>
+                                    </div>
+                                    <div class="d-flex flex-row-reverse">
+                                      <button class="btn btn-outline-light btn-success mt-4" type="submit">send</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                </form>
+                  <script>
+                    function convertFormToJSON(form) {
+                      const array = $(form).serializeArray();
+                      const json = {};
+                      $.each(array, function () {
+                        json[this.name] = this.value || "";
+                      });
+                      return json;
+                    }
+              
+                    $("#contact-form").on("submit", function (e) {
+                      e.preventDefault();
+                      const form = $(e.target);
+                      const json = convertFormToJSON(form);
+                      var test = new Array();
+                          $("input[name='check']:checked").each(function() {
+                              test.push($(this).val());
+                          });
+                      json['Profile']=test;
+                      delete json.check;
+                      console.log(json);
+                      $.ajax({
+                                  url: 'https://localhost:7237/api/DLMS',
+                                  type: 'post',
+                                  data:json,                                  
+                                  crossDomain: true,                                  
+                                  success: function(data){
+                                      console.log(data);
+                                  }
+                                 
+                              });
+                    });
+                  </script>
+<!-- 
+                  <script src="jquery-1.7.1.js" type="text/javascript"></script>
+                  <script>
+                      $(document).ready(function () {
+                          $("#Save").click(function () {
+                              var person = new Object();
+                              person.name = $('#name').val();
+                              person.surname = $('#surname').val();
+                              $.ajax({
+                                  url: 'http://localhost:72372/api/DLMS',
+                                  type: 'POST',
+                                  dataType: 'json',
+                                  data: person,
+                                  success: function (data, textStatus, xhr) {
+                                      console.log(data);
+                                  },
+                                  error: function (xhr, textStatus, errorThrown) {
+                                      console.log('Error in Operation');
+                                  }
+                              });
+                          });
+                      });
+                 </script> -->
+
+
+
+                  <section id="upcoming" class="page hide" data-page="upcoming" style="margin-top: 40px;">
+                    <div class="fs-6 text-start">
+                      <div id="default" class="group">Select communication type first from communication settings</div>
+                    <div id="option1" class="group">
+                      <div class="table-responsive">
+                        <table id="data_table" class="table border rounded-circle">
+                        <thead>
+                        <th scope="col">Name</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Age</th>
+                        <th scope="col"></th>
+                        </thead>
+                        <tbody>
+                          <tr id="row1">
+                            <td id="name_row1">Ankit</td>
+                            <td id="country_row1">India</td>
+                            <td id="age_row1">20</td>
+                            <td>
+                            <input type="button" id="edit_button1" value="Edit" class="edit" onclick="edit_row('1')">
+                            <input type="button" id="save_button1" value="Save" class="save" onclick="save_row('1')">
+                            <input type="image" src="images/trash-can.png" width="16" height="16" class="delete" onclick="delete_row('1')">
+                            </td>
+                            </tr>
+                            <tr id="row2">
+                            <td id="name_row2">Shawn</td>
+                            <td id="country_row2">Canada</td>
+                            <td id="age_row2">26</td>
+                            <td>
+                            <input type="button" id="edit_button2" value="Edit" class="edit" onclick="edit_row('2')">
+                            <input type="button" id="save_button2" value="Save" class="save" onclick="save_row('2')">
+                            <input type="image" src="images/trash-can.png" width="16" height="16" class="delete" onclick="delete_row('2')">
+                            </td>
+                            </tr>
+                            <tr id="row3">
+                            <td id="name_row3">Rahul</td>
+                            <td id="country_row3">India</td>
+                            <td id="age_row3">19</td>
+                            <td>
+                            <input type="button" id="edit_button3" value="Edit" class="edit" onclick="edit_row('3')">
+                            <input type="button" id="save_button3" value="Save" class="save" onclick="save_row('3')">
+                            <input type="image" src="images/trash-can.png" width="16" height="16" class="delete" onclick="delete_row('3')">
+                            </td>
+                            </tr>
+                            <tr>
+                            <td><input type="text" id="new_name"></td>
+                            <td><input type="text" id="new_country"></td>
+                            <td><input type="text" id="new_age"></td>
+                            <td><input type="button" class="add" onclick="add_row();" value="Add Row"></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        <div class="d-flex justify-content-between align-items-end">
+                          <button class="btn btn-outline-light btn-success mt-4 prev" onclick="next2op()">Previous</button>
+                          <button class="btn btn-outline-light btn-success mt-4" onclick="">Submit</button>
+                      </div>
+                        </div>
+                    </div>
+                    <div id="option2" class="group">
+                      <div class="table-responsive">
+                        <table id="data_table2" class="table border rounded-circle">
+                        <thead>
+                        <th scope="col">Name</th>
+                        <th scope="col">Class</th>
+                        <th scope="col">section</th>
+                        <th scope="col"></th>
+                        </thead>
+                        <tbody>
+                          <tr id="rows1">
+                            <td id="name2_row1">Ankit</td>
+                            <td id="country2_row1">India</td>
+                            <td id="age2_row1">20</td>
+                            <td>
+                            <input type="button" id="edit2_button1" value="Edit" class="edit" onclick="edit2_row('1')">
+                            <input type="button" id="save2_button1" value="Save" class="save" onclick="save2_row('1')">
+                            <input type="image" src="images/trash-can.png" width="16" height="16" class="delete" onclick="delete2_row('1')">
+                            </td>
+                            </tr>
+                            <tr id="rows2">
+                            <td id="name2_row2">Shawn</td>
+                            <td id="country2_row2">Canada</td>
+                            <td id="age2_row2">26</td>
+                            <td>
+                            <input type="button" id="edit2_button2" value="Edit" class="edit" onclick="edit2_row('2')">
+                            <input type="button" id="save2_button2" value="Save" class="save" onclick="save2_row('2')">
+                            <input type="image" src="images/trash-can.png" width="16" height="16" class="delete" onclick="delete2_row('2')">
+                            </td>
+                            </tr>
+                            <tr>
+                            <td><input type="text" id="new2_name"></td>
+                            <td><input type="text" id="new2_country"></td>
+                            <td><input type="text" id="new2_age"></td>
+                            <td><input type="button" class="add" onclick="add2_row();" value="Add Row"></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        <div class="d-flex justify-content-between align-items-end">
+                          <button class="btn btn-outline-light btn-success mt-4 prev" onclick="next2op()">Previous</button>
+                          <button class="btn btn-outline-light btn-success mt-4" onclick="">Submit</button>
+                      </div>
+                        </div>
+                    </div>
+                    <div id="option3" class="group">
+                      <div class="table-responsive">
+                        <table id="data_table3" class="table border rounded-circle">
+                        <thead>
+                        <th scope="col">Name</th>
+                        <th scope="col">subject</th>
+                        <th scope="col">marks</th>
+                        <th scope="col"></th>
+                        </thead>
+                        <tbody>
+                          <tr id="rowz1">
+                            <td id="name3_row1">Ankit</td>
+                            <td id="country3_row1">India</td>
+                            <td id="age3_row1">20</td>
+                            <td>
+                            <input type="button" id="edit3_button1" value="Edit" class="edit" onclick="edit3_row('1')">
+                            <input type="button" id="save3_button1" value="Save" class="save" onclick="save3_row('1')">
+                            <input type="image" src="images/trash-can.png" width="16" height="16" class="delete" onclick="delete3_row('1')">
+                            </td>
+                            </tr>
+                            <tr>
+                            <td><input type="text" id="new3_name"></td>
+                            <td><input type="text" id="new3_country"></td>
+                            <td><input type="text" id="new3_age"></td>
+                            <td><input type="button" class="add" onclick="add3_row();" value="Add Row"></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        <div class="d-flex justify-content-between align-items-end">
+                          <button class="btn btn-outline-light btn-success mt-4 prev" onclick="next2op()">Previous</button>
+                          <button class="btn btn-outline-light btn-success mt-4" onclick="">Submit</button>
+                      </div>
+                        </div>
+                    </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+        </div>
+    </section>
+    <script>
+        const lists = document.querySelectorAll(".active-nav li");
+        lists.forEach((item) => {
+        item.addEventListener("click", () => {
+        document.querySelector(".active-nav li.active").classList.remove("active");
+        item.classList.add("active");
+    });
+  });
+      </script>
+      <script>
+        $(document).ready(function() {
+    $(".active-nav li a").on('click', function(e) {
+        e.preventDefault()
+        var page = $(this).data('page');
+        $("#pages .page:not('hide')").stop().fadeOut('fast', function() {
+            $(this).addClass('hide');
+            $('#pages .page[data-page="'+page+'"]').fadeIn('slow').removeClass('hide');
+        });
+      });
+    });
+      </script>
+      <script>
+        $(document).ready(function() {
+    $(".next").on('click', function(e) {
+        e.preventDefault()
+        var page = $(this).data('page');
+        $("#pages .page:not('hide')").stop().fadeOut('fast', function() {
+            $(this).addClass('hide');
+            $('#pages .page[data-page="upcoming"]').fadeIn('slow').removeClass('hide');
+        });
+    });
+});
+        function nextop() {
+      var content = document.querySelector(".active-nav #upcoming.nav-link");
+      document.querySelector(".active-nav li.active").classList.remove("active");
+      content.parentElement.classList.add("active");
+    }
+      </script>
+      <script>
+        $(document).ready(function() {
+    $(".prev").on('click', function(e) {
+        e.preventDefault()
+        var page = $(this).data('page');
+        $("#pages .page:not('hide')").stop().fadeOut('fast', function() {
+            $(this).addClass('hide');
+            $('#pages .page[data-page="active"]').fadeIn('slow').removeClass('hide');
+        });
+    });
+});
+        function next2op() {
+      var content1 = document.querySelector(".active-nav #active.nav-link");
+      document.querySelector(".active-nav li.active").classList.remove("active");
+      content1.parentElement.classList.add("active");
+    }
+      </script>
+      <script>
+        $(function() {
+        $('#btnSave').click(function() {
+        var favorite = [];
+        $.each($("input[name='check']:checked"), function() {
+          favorite.push($(this).val());
+            });
+          $('#demo').html(favorite.join(", "));
+          $('#staticBackdrop').modal('hide');
+          $('#countno').html(favorite.length);
+
+        });
+      });
+      </script>
+      <script>
+        $(document).ready(function () {
+  $('.group').hide();
+  $('#default').show();
+  $('.div-toggle').change(function () {
+    $('.group').hide();
+    $('#'+$(this).val()).show();
+  })
+});
+      </script>
+      <script>function edit_row(no)
+        {
+         document.getElementById("edit_button"+no).style.display="none";
+         document.getElementById("save_button"+no).style.display="block";
+            
+         var name=document.getElementById("name_row"+no);
+         var country=document.getElementById("country_row"+no);
+         var age=document.getElementById("age_row"+no);
+            
+         var name_data=name.innerHTML;
+         var country_data=country.innerHTML;
+         var age_data=age.innerHTML;
+            
+         name.innerHTML="<input type='text' id='name_text"+no+"' value='"+name_data+"'>";
+         country.innerHTML="<input type='text' id='country_text"+no+"' value='"+country_data+"'>";
+         age.innerHTML="<input type='text' id='age_text"+no+"' value='"+age_data+"'>";
+        }
+        
+        function save_row(no)
+        {
+         var name_val=document.getElementById("name_text"+no).value;
+         var country_val=document.getElementById("country_text"+no).value;
+         var age_val=document.getElementById("age_text"+no).value;
+        
+         document.getElementById("name_row"+no).innerHTML=name_val;
+         document.getElementById("country_row"+no).innerHTML=country_val;
+         document.getElementById("age_row"+no).innerHTML=age_val;
+        
+         document.getElementById("edit_button"+no).style.display="block";
+         document.getElementById("save_button"+no).style.display="none";
+        }
+        
+        function delete_row(no)
+        {
+         document.getElementById("row"+no+"").outerHTML="";
+        }
+        
+        function add_row()
+        {
+         var new_name=document.getElementById("new_name").value;
+         var new_country=document.getElementById("new_country").value;
+         var new_age=document.getElementById("new_age").value;
+            
+         var table=document.getElementById("data_table");
+         var table_len=(table.rows.length)-1;
+         var row = table.insertRow(table_len).outerHTML="<tr id='row"+table_len+"'><td id='name_row"+table_len+"'>"+new_name+"</td><td id='country_row"+table_len+"'>"+new_country+"</td><td id='age_row"+table_len+"'>"+new_age+"</td><td><input type='button' id='edit_button"+table_len+"' value='Edit' class='edit' onclick='edit_row("+table_len+")'> <input type='button' id='save_button"+table_len+"' value='Save' class='save' onclick='save_row("+table_len+")'> <input type='image' src='images/trash-can.png' width='16' height='16' class='delete' onclick='delete_row("+table_len+")'></td></tr>";
+        
+         document.getElementById("new_name").value="";
+         document.getElementById("new_country").value="";
+         document.getElementById("new_age").value="";
+        }
+        </script>
+      <script>
+        function edit2_row(no)
+        {
+         document.getElementById("edit2_button"+no).style.display="none";
+         document.getElementById("save2_button"+no).style.display="block";
+            
+         var name=document.getElementById("name2_row"+no);
+         var country=document.getElementById("country2_row"+no);
+         var age=document.getElementById("age2_row"+no);
+            
+         var name_data=name.innerHTML;
+         var country_data=country.innerHTML;
+         var age_data=age.innerHTML;
+            
+         name.innerHTML="<input type='text' id='name2_text"+no+"' value='"+name_data+"'>";
+         country.innerHTML="<input type='text' id='country2_text"+no+"' value='"+country_data+"'>";
+         age.innerHTML="<input type='text' id='age2_text"+no+"' value='"+age_data+"'>";
+        }
+        
+        function save2_row(no)
+        {
+         var name_val=document.getElementById("name2_text"+no).value;
+         var country_val=document.getElementById("country2_text"+no).value;
+         var age_val=document.getElementById("age2_text"+no).value;
+        
+         document.getElementById("name2_row"+no).innerHTML=name_val;
+         document.getElementById("country2_row"+no).innerHTML=country_val;
+         document.getElementById("age2_row"+no).innerHTML=age_val;
+        
+         document.getElementById("edit2_button"+no).style.display="block";
+         document.getElementById("save2_button"+no).style.display="none";
+        }
+        function delete2_row(no)
+        {
+         document.getElementById("rows"+no+"").outerHTML="";
+        }
+        function add2_row()
+        {
+         var new_name=document.getElementById("new2_name").value;
+         var new_country=document.getElementById("new2_country").value;
+         var new_age=document.getElementById("new2_age").value;
+            
+         var table=document.getElementById("data_table2");
+         var table_len=(table.rows.length)-1;
+         var row = table.insertRow(table_len).outerHTML="<tr id='rows"+table_len+"'><td id='name2_row"+table_len+"'>"+new_name+"</td><td id='country2_row"+table_len+"'>"+new_country+"</td><td id='age2_row"+table_len+"'>"+new_age+"</td><td><input type='button' id='edit2_button"+table_len+"' value='Edit' class='edit' onclick='edit2_row("+table_len+")'> <input type='button' id='save2_button"+table_len+"' value='Save' class='save' onclick='save2_row("+table_len+")'> <input type='image' src='images/trash-can.png' width='16' height='16' class='delete' onclick='delete2_row("+table_len+")'></td></tr>";
+        
+         document.getElementById("new2_name").value="";
+         document.getElementById("new2_country").value="";
+         document.getElementById("new2_age").value="";
+        }
+        </script>
+        <script>
+          function edit3_row(no)
+            {
+             document.getElementById("edit3_button"+no).style.display="none";
+             document.getElementById("save3_button"+no).style.display="block";
+                
+             var name=document.getElementById("name3_row"+no);
+             var country=document.getElementById("country3_row"+no);
+             var age=document.getElementById("age3_row"+no);
+                
+             var name_data=name.innerHTML;
+             var country_data=country.innerHTML;
+             var age_data=age.innerHTML;
+                
+             name.innerHTML="<input type='text' id='name3_text"+no+"' value='"+name_data+"'>";
+             country.innerHTML="<input type='text' id='country3_text"+no+"' value='"+country_data+"'>";
+             age.innerHTML="<input type='text' id='age3_text"+no+"' value='"+age_data+"'>";
+            }
+            
+            function save3_row(no)
+            {
+             var name_val=document.getElementById("name3_text"+no).value;
+             var country_val=document.getElementById("country3_text"+no).value;
+             var age_val=document.getElementById("age3_text"+no).value;
+            
+             document.getElementById("name3_row"+no).innerHTML=name_val;
+             document.getElementById("country3_row"+no).innerHTML=country_val;
+             document.getElementById("age3_row"+no).innerHTML=age_val;
+            
+             document.getElementById("edit3_button"+no).style.display="block";
+             document.getElementById("save3_button"+no).style.display="none";
+            }
+            
+            function delete3_row(no)
+            {
+             document.getElementById("rowz"+no+"").outerHTML="";
+            }
+            function add3_row()
+            {
+             var new_name=document.getElementById("new3_name").value;
+             var new_country=document.getElementById("new3_country").value;
+             var new_age=document.getElementById("new3_age").value;
+                
+             var table=document.getElementById("data_table3");
+             var table_len=(table.rows.length)-1;
+             var row = table.insertRow(table_len).outerHTML="<tr id='rowz"+table_len+"'><td id='name3_row"+table_len+"'>"+new_name+"</td><td id='country3_row"+table_len+"'>"+new_country+"</td><td id='age3_row"+table_len+"'>"+new_age+"</td><td><input type='button' id='edit3_button"+table_len+"' value='Edit' class='edit' onclick='edit3_row("+table_len+")'> <input type='button' id='save3_button"+table_len+"' value='Save' class='save' onclick='save3_row("+table_len+")'> <input type='image' src='images/trash-can.png' width='16' height='16' class='delete' onclick='delete3_row("+table_len+")'></td></tr>";
+            
+             document.getElementById("new3_name").value="";
+             document.getElementById("new3_country").value="";
+             document.getElementById("new3_age").value="";
+            }
+            </script>
+            <script>
+              function openNav() {
+        document.body.style.overflowY="hidden";
+        document.getElementById("mySidebar").style.width = "100%";
+        document.getElementById("main").style.marginLeft = "250px";
+      }
+      function closeNav() {
+    document.body.style.overflowY="scroll";
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+}
+</script>
+
+  </body>
+
+  </html>
+  
+  
